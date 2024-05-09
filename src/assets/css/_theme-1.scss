@@ -1,0 +1,145 @@
+.theme-1 {
+  flex-direction: column;
+
+  &__header {
+    width: 100%;
+    height: 70px;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+
+    img {
+      width: 110px;
+    }
+
+    .company-name {
+      font-family: Technica_Semi_Bold;
+      font-size: 22px;
+      color: rgba(0,0,0,.7);
+    }
+
+    .current-date-time {
+      display: flex;
+      gap: 10px;
+
+      span {
+        // color: #11335A;
+        font-size: 18px;
+
+        &:last-child {
+          font-family: Digital;
+          font-size: 30px;
+          font-weight: 600;
+        }
+      }
+    }
+  }
+
+  &__body {
+    width: 100%;
+    height: calc(100% - 120px);
+    display: flex;
+
+    .now-serving {
+      width: 70%;
+      height: 100%;
+      background: linear-gradient(to right, #ffa52e, #ff651a);
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+
+      &__title {
+        color: #fff;
+        font-size: 40px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+
+      &__content {
+        background: #fff;
+        width: 100%;
+        height: inherit;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
+        overflow: hidden;
+
+        span {
+          font-weight: 600;
+          font-size: 100px;
+          text-transform: uppercase;
+          color: #11335A;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 30%;
+          width: 100%;
+
+          &:first-child {
+            width: 100%;
+            font-size: 20vw;
+            border-bottom: 3px dashed rgba(0,0,0,.2);
+            height: 70%;
+            display: grid;
+            place-items: center;
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              left: -15px;
+              bottom: -15px;
+              background: #ffa52e;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+            }
+
+            &::after {
+              content: '';
+              position: absolute;
+              right: -15px;
+              bottom: -15px;
+              background: #ff651a;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+            }
+          }
+        }
+      }
+    }
+
+    .in-queue {
+      width: 30%;
+      height: 100%;
+      background: #000;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      &__title {
+        color: #fff;
+        font-size: 40px;
+        text-transform: uppercase;
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__footer {
+    background: #fff;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
