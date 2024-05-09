@@ -11,7 +11,7 @@ import videoAds from '@assets/videos/video-ads.mp4'
 import { getDate, formatQueueNumber } from '@utilities/helper'
 
 // modals
-import Modal from '@modals'
+// import Modal from '@modals'
 
 function App (props) {
   const theme = props.theme
