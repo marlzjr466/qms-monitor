@@ -14,6 +14,13 @@
     // background: #3770f5;
     padding: 20px;
     border-right: 1px solid #fff;
+    transition: all 1000ms ease-in;
+
+    &.hide {
+      overflow: hidden;
+      width: 0;
+      padding: 0;
+    }
 
     &--title {
       color: #fff;
@@ -133,14 +140,24 @@
     @extend .flex;
     @extend .flex-column;
     @extend .full-height;
+    transition: all 1000ms ease-in-out;
 
     width: 70%;
+
+    &.fullsize {
+      width: 100%;
+    }
 
     &--ads {
       @extend .full-width;
       position: relative;
       height: 75%;
       overflow: hidden;
+      transition: all 1000ms ease-in-out;
+
+      &.fullsize {
+        height: 100%;
+      }
 
       img, video {
         @extend .full-size;
@@ -209,6 +226,13 @@
       padding: 10px 10px 20px 10px;
       gap: 10px;
       background: linear-gradient(to bottom, #21e7ad, #3770f5);
+      transition: all 1000ms ease-in-out;
+
+      &.hide {
+        overflow: hidden;
+        height: 0;
+        padding: 0;
+      }
 
       .title {
         font-size: 22px;

@@ -19,6 +19,7 @@ function App (props) {
   
   const meta = useCallback({
     ...metaStates('app', [
+      'session',
       'companyName',
       'inqueues',
       'counters',
@@ -27,6 +28,7 @@ function App (props) {
 
     ...metaMutations('app', [
       'SET_COUNTERS',
+      'SET_SESSION'
     ]),
 
     ...metaGetters('app', [
@@ -146,13 +148,17 @@ function App (props) {
     
     search('counters')
     search('queues')
+
+    setTimeout(() => {
+      meta.SET_SESSION(1)
+    }, 10000)
   }, [])
 
   return (
     <>
       <div className="main-container">
         <div className={`${theme}`}>
-          <div className={`${theme}__now-serving`}>
+          <div className={`${theme}__now-serving ${!meta.session ? 'hide' : ''}`}>
             <div className={`${theme}__now-serving--title`}>
               now serving
             </div>
@@ -165,8 +171,8 @@ function App (props) {
             </ul>
           </div>
 
-          <div className={`${theme}__in-queue`}>
-            <div className={`${theme}__in-queue--ads`}>
+          <div className={`${theme}__in-queue ${!meta.session ? 'fullsize' : ''}`}>
+            <div className={`${theme}__in-queue--ads ${!meta.session ? 'fullsize' : ''}`}>
               <img src={ads} alt="Ads image" />
               
               {
@@ -189,7 +195,7 @@ function App (props) {
               <span>{ meta.companyName }</span>
             </div>
 
-            <div className={`${theme}__in-queue--tickets`}>
+            <div className={`${theme}__in-queue--tickets ${!meta.session ? 'hide' : ''}`}>
               <div className="title">in queue</div>
 
               <ul className='list'>

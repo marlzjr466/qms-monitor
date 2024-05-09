@@ -5,6 +5,7 @@ export default () => ({
   name: 'app',
 
   metaStates: {
+    session: 0,
     companyName: 'Queueing Management System',
     inqueues: [],
     counters: [],
@@ -13,6 +14,10 @@ export default () => ({
   },
 
   metaMutations: {
+    SET_SESSION: (state, { payload }) => {
+      state.session = payload
+    },
+
     SET_COUNTERS: (state, { payload }) => {
       state.counters = payload
     },

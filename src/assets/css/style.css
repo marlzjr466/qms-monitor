@@ -156,6 +156,12 @@ ul, ol {
   background: linear-gradient(to bottom, #21e7ad, #3770f5);
   padding: 20px;
   border-right: 1px solid #fff;
+  transition: all 1000ms ease-in;
+}
+.theme-default__now-serving.hide {
+  overflow: hidden;
+  width: 0;
+  padding: 0;
 }
 .theme-default__now-serving--title {
   color: #fff;
@@ -235,12 +241,20 @@ ul, ol {
   font-size: 6vb;
 }
 .theme-default__in-queue {
+  transition: all 1000ms ease-in-out;
   width: 70%;
+}
+.theme-default__in-queue.fullsize {
+  width: 100%;
 }
 .theme-default__in-queue--ads {
   position: relative;
   height: 75%;
   overflow: hidden;
+  transition: all 1000ms ease-in-out;
+}
+.theme-default__in-queue--ads.fullsize {
+  height: 100%;
 }
 .theme-default__in-queue--ads img, .theme-default__in-queue--ads video {
   position: absolute;
@@ -286,6 +300,12 @@ ul, ol {
   padding: 10px 10px 20px 10px;
   gap: 10px;
   background: linear-gradient(to bottom, #21e7ad, #3770f5);
+  transition: all 1000ms ease-in-out;
+}
+.theme-default__in-queue--tickets.hide {
+  overflow: hidden;
+  height: 0;
+  padding: 0;
 }
 .theme-default__in-queue--tickets .title {
   font-size: 22px;
