@@ -19,9 +19,8 @@ const reduxMeta = new ReduxMeta()
 window.$reduxMeta = reduxMeta
 window.$reduxMeta.useModules(app())
 
-// init socket globally
-window.$socket = socket
-window.$socket.connect()
+// init socket
+socket.connect()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

@@ -9,6 +9,8 @@ import videoAds from '@assets/videos/video-ads.mp4'
 
 // utilities
 import { getDate, formatQueueNumber } from '@utilities/helper'
+import socket from '@utilities/socket'
+
 
 // modals
 // import Modal from '@modals'
@@ -136,22 +138,27 @@ function App (props) {
   })
 
   useEffect(() => {
-    window.$socket.on('current-time', time => {
+    socket.on('current-time', time => {
       setCurrentTime(time)
     })
 
-    window.$socket.on('refresh', types => {
+    socket.on('refresh', types => {
       types.forEach(type => {
         search(type)
       })
     })
+
+    socket.on('session-start', () => {
+      localStorage.setItem('session-start', 1)
+      meta.SET_SESSION(1)
+    })
+
+    if (localStorage.getItem('session-start')) {
+      meta.SET_SESSION(1)
+    }
     
     search('counters')
     search('queues')
-
-    setTimeout(() => {
-      meta.SET_SESSION(1)
-    }, 10000)
   }, [])
 
   return (

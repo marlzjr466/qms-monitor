@@ -1,18 +1,20 @@
-import { io } from "socket.io-client"
+import { Manager } from "socket.io-client"
 
 // constants
 import env from '@constants'
 
 class Socket {
   constructor () {
-    this.io = io
+    this.manaager = null
     this.socket = null
   }
 
   connect () {
-    this.socket = this.io(`${env.SOCKET_URL}`, {
+    this.manager = new Manager(`${env.SOCKET_URL}`, {
       transports: ["websocket", "polling"]
     })
+
+    this.socket = this.manager.socket('/qms')
     
     this.socket.on('connect', () =>  {
       console.log('socket connected to server')
