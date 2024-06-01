@@ -11,12 +11,15 @@ import videoAds from '@assets/videos/video-ads.mp4'
 import { getDate, formatQueueNumber } from '@utilities/helper'
 import socket from '@utilities/socket'
 
+// hooks
+import useTextToSpeech from '@hooks/useTextToSpeech'
 
 // modals
 // import Modal from '@modals'
 
 function App (props) {
   const theme = props.theme
+  const { speak } = useTextToSpeech()
   const { metaStates, metaMutations, metaGetters, metaActions } = window.$reduxMeta.useMeta()
   
   const meta = useCallback({
@@ -95,7 +98,8 @@ function App (props) {
   })
 
   const renderCounters = useMemo(() => {
-    const counters = []
+    const availableCounters = meta.counters.filter(x => x.session)
+    const res = []
     let length = 5
 
     if (meta.counters.length > 5) {
@@ -103,29 +107,29 @@ function App (props) {
     }
 
     for (let i = 0; i < length; i++) {
-      counters.push(
+      res.push(
         <li
           key={i}
-          className={!meta.counters[i] ? 'empty' : ''}
+          className={!availableCounters[i] ? 'empty' : ''}
         >
           {
-            meta.counters[i]
+            availableCounters[i]
             ? <>
               <div className='counter'>
-                <span>{ meta.counters[i].id }</span>
+                <span>{ availableCounters[i].id }</span>
                 <span>
                   counter
 
-                  <b>{ meta.counters[i].id }</b>
+                  <b>{ availableCounters[i].id }</b>
                 </span>
               </div>
               <div
                 className={`
                   ticket-number
-                  ${meta.counters[i].serving ? '' : 'avail'}
+                  ${availableCounters[i].serving ? '' : 'avail'}
                 `}
               >
-                { meta.counters[i].serving ? formatQueueNumber(meta.counters[i].serving) : '----' }
+                { availableCounters[i].serving ? formatQueueNumber(availableCounters[i].serving) : '----' }
               </div>
             </>
             : '----'
@@ -134,7 +138,7 @@ function App (props) {
       )
     }
 
-    return counters
+    return res
   })
 
   useEffect(() => {
@@ -151,6 +155,15 @@ function App (props) {
     socket.on('session-start', () => {
       localStorage.setItem('session-start', 1)
       meta.SET_SESSION(1)
+    })
+
+    socket.on('session-stop', () => {
+      localStorage.clear()
+      meta.SET_SESSION(0)
+    })
+
+    socket.on('monitor:call-again', data => {
+      speak(`Ticket number ${formatQueueNumber(data.ticket)}, please proceed to counter ${data.counter}.`, 'f')
     })
 
     if (localStorage.getItem('session-start')) {
